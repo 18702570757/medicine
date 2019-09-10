@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etc.dao.CartDAO">
+    <insert id="add" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO t_cart (
+	user_id,
+	medicine_id,
+	medicine_number
+)
+VALUES
+	(#{userId}, #{medicineId}, #{medicineNumber});
+    </insert>
+    <select id="isExist" resultType="cart" >
+        select * from t_cart where user_id=#{userId} and medicine_id=#{medicineId}
+    </select>
+    <update id="updateNum">
+        update t_cart set medicine_number=medicine_number+#{medicineNumber} where user_id=#{userId} and medicine_id=#{medicineId}
+    </update>
+	<select id="dselect" resultType="dcart">
+		 SELECT
+	t_cart.medicine_id,
+	t_cart.user_id,
+	t_medicine.m_img,
+	t_medicine.m_name,
+	t_medicine.price,
+	t_cart.medicine_number
+FROM
+	t_medicine,
+	t_cart,
+	t_user
+WHERE
+	t_cart.user_id = t_user.user_id
+AND t_medicine.m_id = t_cart.medicine_id
+AND t_user.user_id = #{userId}
+	</select>
+	<delete id="del">
+		delete from t_cart where user_id=#{userId} and medicine_Id=#{medicineId}
+	</delete>
+
+</mapper>

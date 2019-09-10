@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etc.dao.QmedicineDAO">
+    <select id="select" resultType="medicine">
+        select * from t_medicine
+    </select>
+    <select id="selecttop" resultType="medicine">
+        select * from t_medicine order by production_date desc
+    </select>
+    <select id="selectById" resultType="medicine">
+        select * from t_medicine where m_id=#{mId}
+    </select>
+    <select id="selectByType" resultType="medicine">
+        select * from t_medicine where m_type=#{mType}
+    </select>
+</mapper>
